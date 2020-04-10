@@ -40,13 +40,24 @@ Demonstrate your understanding of this Sprint's concepts by answering the follow
 
 - [ ] Mention two parts of Express that you learned about this week.
 
+1. Express can set web application settings like the port to use for connecting.
+2. Express helps manage routes and requests
+
 - [ ] Describe Middleware?
+
+Middleware are functions that act as checkpoints, between the client and server, to validate if a request is a good or bad.
 
 - [ ] Describe a Resource?
 
+A resource is an object with a type, associated data, relationships to other resources, and a set of methods that operate on it. like a RESTful API.
+
 - [ ] What can the API return to help clients know if a request was successful?
 
+You can return a status.json 200 code to let clients know a request was successful. 
+
 - [ ] How can we partition our application into sub-applications?
+
+You can use express router to partition the application into sub-applications.
 
 ## Minimum Viable Product
 
