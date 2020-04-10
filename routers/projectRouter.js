@@ -59,6 +59,35 @@ router
     });
 });
 
+
+//edit projects by id
+router
+.put('/:id', validateProject, validateProjectId, (req, res) => {
+  Projects.update(req.params.id, req.body)
+    .then(project => {
+        res.status(200).json(project)
+        })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json({ errorMessage: "Could not update the project" });
+    });
+});
+
+
+//delete project by id
+router
+.delete('/:id', validateProjectId, (req, res) => {
+  Projects.remove(req.params.id)
+    .then(project => {
+      res.status(200).json(project);
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json({ errorMessage: "Could not delete the project" });
+    });
+});
+
+
 //custom middleware
 
 function validateProjectId(req, res, next) {
