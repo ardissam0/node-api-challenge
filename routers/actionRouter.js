@@ -19,10 +19,58 @@ router
 });
 
 
+//retrieve actions by id
+router
+.get('/:id', validateActionId, (req, res) => {
+  Actions.get(req.params.id)
+  .then(action => {
+    res.status(200).json(action)
+  })
+  .catch(error => {
+    console.log(error)
+    res.status(500).json({error: 'Action with that ID could not be retrieved'})
+  })
+      });
+
+//add action
+router
+.post('/', validateAction, (req, res) => {
+    Actions.insert(req.body)
+    .then(action => {
+      res.status(200).json(action);
+    })
+    .catch(err => {
+      res.status(500).json({ message: "Error, could not add action" });
+    });
+});
 
 
+//edit actions by id
+router
+.put('/:id', validateAction, validateActionId, (req, res) => {
+  Actions.update(req.params.id, req.body)
+    .then(action => {
+        res.status(200).json(action)
+        })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json({ errorMessage: "Could not update action" });
+    });
+});
 
 
+//delete action
+router
+.delete('/:id', validateActionId, (req, res) => {
+  Actions.remove(req.params.id)
+    .then(action => {
+      res.status(200).json(action);
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json({ errorMessage: "Could not delete action" });
+    });
+});
 
 
 //custom middleware
