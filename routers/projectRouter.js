@@ -33,9 +33,32 @@ router
       });
 
 
+//retrieve project actions 
+router
+.get('/:id/actions', validateProjectId, (req, res) => {
+  Projects.getProjectActions(req.params.id)
+    .then(action => {
+      res.status(200).json(action);
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json({ errorMessage: "Error, could not get action" });
+    });
+});
 
 
-      
+//add project
+router
+.post('/', validateProject, (req, res) => {
+    Projects.insert(req.body)
+    .then(project => {
+      res.status(200).json(project);
+    })
+    .catch(err => {
+      res.status(500).json({ message: "Error, could not add project" });
+    });
+});
+
 //custom middleware
 
 function validateProjectId(req, res, next) {
